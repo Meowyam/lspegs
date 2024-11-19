@@ -1,0 +1,61 @@
+{
+  "type": "object",
+  "properties": {
+    "nl4eng": {
+      "$ref": "#/definitions/languageData"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "languageData": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "patternProperties": {
+          ".*": { 
+            "$ref": "#/definitions/tree"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "tree": {
+      "type": "object",
+      "properties": {
+        "All": {
+          "$ref": "#/definitions/leaf"
+        },
+        "Any": {
+          "$ref": "#/definitions/leaf"
+        },
+        "Leaf": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "leaf": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/structure"
+          }
+        },
+        "label": {
+          "type": "object",
+          "properties": {
+            "Pre": {
+              "type": "string"
+            }
+          },
+          "required": ["Pre"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["children", "label"],
+      "additionalProperties": false
+    }
+  }
+}

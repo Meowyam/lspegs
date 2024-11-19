@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["com", "all", "any", "say", "ele"]
+    },
+    "children": {
+      "type": "array",
+      "items": {
+        "$ref": "#"
+      }
+    },
+    "value": {
+      "type": "string"
+    }
+  },
+  "required": ["type"],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "say"
+          }
+        }
+      },
+      "then": {
+        "required": ["value"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "enum": ["com", "all", "any"]
+          }
+        }
+      },
+      "then": {
+        "required": ["children"]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "type": {
+            "const": "ele"
+          }
+        }
+      },
+      "then": {
+        "required": ["value"]
+      }
+    }
+  ]
+}
