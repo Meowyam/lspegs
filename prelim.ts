@@ -23,33 +23,33 @@ class L4Client {
 
   // send analysis request
   async requestAnalysis(document: TextDocument): Promise<L4AnalysisResponse> {
-      const params = {
-          textDocument: { uri: document.uri.toString() },
-          version: document.version
-      }
+    const params = {
+      textDocument: { uri: document.uri.toString() },
+        version: document.version
+    }
 
-      try {
-          // send request to server here
-          const response = await this.connection.sendRequest(
-              l4/analysis,  // this is the LSP method
-              params
-          )
-          return response
-      } catch (error) {
-          console.error('error messages here:', error)
-          throw error
-      }
+    try {
+      // send request to server here
+      const response = await this.connection.sendRequest(
+          l4/analysis,  // this is the LSP method
+          params
+      )
+      return response
+    } catch (error) {
+      console.error('error messages here:', error)
+      throw error
+    }
   }
 
   // init, custom stuff
   initialize(): void {
-      const capabilities = {
-          customCapabilities: {
-              analyzeSupportEnabled: true
-          }
+    const capabilities = {
+      customCapabilities: {
+        analyzeSupportEnabled: true
       }
+    }
 
-      this.connection.sendRequest('initialize', { capabilities })
+    this.connection.sendRequest('initialize', { capabilities })
   }
 }
 
@@ -80,15 +80,15 @@ method: 'l4/incrementalUpdate'
 
 method: 'l4/analysisComplete'
 params: {
-    uri: string // obviously URI of tmp doc that has new vis data
-    success: boolean
-    version: number // or maybe a timestamp
+  uri: string // obviously URI of tmp doc that has new vis data
+  success: boolean
+  version: number // or maybe a timestamp
 }
 
 method: 'l4/visUpdate'
 params: {
-    uri: string
-    visualizationData: VisJSON
+  uri: string
+  visualizationData: VisJSON
 }
 
 // function that triggers analysis request
